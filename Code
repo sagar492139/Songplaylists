@@ -1,0 +1,94 @@
+import java.util.*;
+
+		class Song {
+		    private String name;
+		    private User user;
+
+		    public Song(String name, User user) {
+		        this.name = name;
+		        this.user = user;
+		    }
+
+		    public String getName() {
+		        return name;
+		    }
+
+		    public User getUser() {
+		        return user;
+		    }
+		}
+
+		class User {
+		    private String username;
+		    private List<Song> rPS;
+
+		    public User(String username) {
+		        this.username = username;
+		        this.rPS = new ArrayList<>();
+		    }
+
+		    public void playSong(String songName) {
+		        Song song = new Song(songName, this);
+		       rPS.add(song);
+		    }
+
+		    public List<Song> getRecentlyPlayedSongs(int capacity) {
+		        int startIndex = Math.max(0, rPS.size() - capacity);
+		        return rPS.subList(startIndex, rPS.size());
+		    }
+
+		    public String getUsername() {
+		        return username;
+		    }
+		}
+
+		public class Secondpgm {
+		    public static void main(String[] args) {
+		        int initialCapacity = 3;
+		        User user = new User("User123");
+
+		        user.playSong("S1");
+		        user.playSong("S2");
+		        user.playSong("S3");
+
+		         List<Song> recentSongs = user.getRecentlyPlayedSongs(initialCapacity);
+
+		        System.out.println(" played songs playlist:");
+		        for (Song song : recentSongs) {
+		            System.out.println(song.getName());
+		        }
+
+		        user.playSong("S2");
+		        user.playSong("S3");
+		        user.playSong("S4");
+
+		        recentSongs = user.getRecentlyPlayedSongs(initialCapacity);
+
+		        System.out.println("\nWhen s4 song is played \n The playlist would be like:");
+		        for (Song song : recentSongs) {
+		            System.out.println(song.getName());
+		        }
+		        
+		        user.playSong("S3");
+		        user.playSong("S4");
+		        user.playSong("S2");
+
+		        recentSongs = user.getRecentlyPlayedSongs(initialCapacity);
+
+		         System.out.println("\nWhen s2 song is played\n The playlist would be like:");
+		        for (Song song : recentSongs) {
+		            System.out.println(song.getName());
+		        }
+		        
+		        user.playSong("S4");
+		        user.playSong("S2");
+		        user.playSong("S1");
+
+		         recentSongs = user.getRecentlyPlayedSongs(initialCapacity);
+
+		         System.out.println("\nWhen s1 song is played\n The playlist would be like:");
+		        for (Song song : recentSongs) {
+		            System.out.println(song.getName());
+		        }
+		    }
+		}
